@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const spellingRoutes = require("./routes/spellingRouts");
 const cors = require("cors");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const port = process.env.PORT || 3000;
+const uri = process.env.MONGODBURL;
 
 const app = express();
 
@@ -14,7 +20,7 @@ app.use(cors());
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/spellingsDB", {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -24,6 +30,6 @@ mongoose
 // Use Routes
 app.use("/spellings", spellingRoutes);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log("Server is running on port 7000");
 });
