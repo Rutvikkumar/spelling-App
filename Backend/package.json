@@ -14,8 +14,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
-    "build": "npm i"
+    "start": "nodemon index.js"
   },
   "author": "Rutvik Parmar",
   "license": "ISC"
