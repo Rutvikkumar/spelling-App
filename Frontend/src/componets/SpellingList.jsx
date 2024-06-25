@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AddSpelling from "./AddSpelling";
 import axios from 'axios';
 import 'tailwindcss/tailwind.css';
 
@@ -17,7 +16,7 @@ const SpellingList = () => {
             console.log('API response:', response.data);
 
             // Ensure spellings is an array
-            const spellingsData = response.data || [];
+            const spellingsData = Array.isArray(response.data) ? response.data : [];
 
             console.log('Spellings:', spellingsData);
 
@@ -31,7 +30,6 @@ const SpellingList = () => {
 
     return (
         <div className='screen flex items-center justify-center p-5'>
-            {/* <h2>Spelling List</h2> */}
             {loading ? (
                 <p>Loading...</p>
             ) : (
