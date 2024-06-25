@@ -21,27 +21,34 @@ const SpellingSearch = () => {
     };
 
     return (
-        <div>
-            <h2>Search for a Spelling</h2>
+        <div className="p-10 max-w-lg mx-auto">
+        <h2 className="text-2xl font-bold mb-6">Search for a Spelling</h2>
+        <div className="mb-4">
             <input
                 type="text"
                 value={word}
                 onChange={(e) => setWord(e.target.value)}
                 placeholder="Enter word"
+                className="input input-bordered input-accent w-full"
             />
-            <button onClick={handleSearch}>Search</button>
-
-            {loading && <p>Loading...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            {spellings.length > 0 && (
-                <ul>
-                    {spellings.map((spelling) => (
-                        <li key={spelling._id}>{spelling.word} - {spelling.meaning}</li>
-                    ))}
-                </ul>
-            )}
         </div>
+        <div className="mb-4">
+            <button onClick={handleSearch} className="btn btn-success w-full">
+                Search
+            </button>
+        </div>
+        {loading && <p className="text-center">Loading...</p>}
+        {error && <p className="text-center text-red-500">{error}</p>}
+        {spellings.length > 0 && (
+            <ul className="list-disc pl-5">
+                {spellings.map((spelling) => (
+                    <li key={spelling._id} className="mb-2">
+                        <span className="font-bold">{spelling.word}</span> - {spelling.meaning}
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
     );
 };
 

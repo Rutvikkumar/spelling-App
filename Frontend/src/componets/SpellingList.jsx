@@ -29,17 +29,19 @@ const SpellingList = () => {
     };
 
     return (
-        <div className='screen flex items-center justify-center p-5'>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <ul className="menu menu-lg rounded-box bg-accent w-50rem">
-                    {spellings.map(spelling => (
-                        <li className="p-5 text-lg text-white font-bold items-center" key={spelling._id}>{spelling.word} - {spelling.meaning}</li>
-                    ))}
-                </ul>
-            )}
-        </div>
+        <div className="screen flex items-center justify-center p-5">
+        {loading ? (
+            <p className="text-lg text-center">Loading...</p>
+        ) : (
+            <ul className="menu menu-lg rounded-box bg-accent w-full max-w-2xl">
+                {spellings.map(spelling => (
+                    <li className="p-5 text-lg text-white font-bold" key={spelling._id}>
+                        {spelling.word} - {spelling.meaning}
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
     );
 };
 

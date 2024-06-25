@@ -19,21 +19,36 @@ const AddSpelling = () => {
     };
 
     return (
-        <div>
-            <h2>Add Spelling</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Word</label>
-                    <input type="text" value={word} onChange={(e) => setWord(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Meaning</label>
-                    <input type="text" value={meaning} onChange={(e) => setMeaning(e.target.value)} required />
-                </div>
-                
-                <button type="submit">Add Spelling</button>
-            </form>
-        </div>
+        <div className="p-10 max-w-lg mx-auto">
+        <h2 className="text-2xl font-bold mb-6">Add Spelling</h2>
+        <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Word</label>
+                <input
+                    className="input input-bordered input-accent w-full"
+                    placeholder="Type here"
+                    type="text"
+                    value={word}
+                    onChange={(e) => setWord(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Meaning</label>
+                <input
+                    className="input input-bordered input-accent w-full"
+                    placeholder="Type here"
+                    type="text"
+                    value={meaning}
+                    onChange={(e) => setMeaning(e.target.value)}
+                    required
+                />
+            </div>
+            <button className="btn btn-success w-full" type="submit">
+                Add Spelling
+            </button>
+        </form>
+    </div>
     );
 };
 
