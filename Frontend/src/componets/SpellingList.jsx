@@ -13,7 +13,7 @@ const SpellingList = () => {
 
     const fetchSpellings = async () => {
         try {
-            const response = await axios.get('http://localhost:7000/spellings');
+            const response = await axios.get('/spellings');
             console.log('API response:', response.data);
 
             // Ensure spellings is an array

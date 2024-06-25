@@ -8,7 +8,7 @@ const AddSpelling = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:7000/spellings', { word, meaning});
+            await axios.post('/spellings', { word, meaning});
             setWord('');
             setMeaning('');
             alert('Spelling added successfully');

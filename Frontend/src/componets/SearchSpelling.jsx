@@ -11,7 +11,7 @@ const SpellingSearch = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`http://localhost:7000/spellings/search?word=${word}`);
+            const response = await axios.get(`/spellings/search?word=${word}`);
             setSpellings(response.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Error fetching spellings');
