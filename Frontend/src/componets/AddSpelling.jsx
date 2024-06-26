@@ -4,7 +4,6 @@ import axios from 'axios';
 const AddSpelling = () => {
     const [word, setWord] = useState('');
     const [meaning, setMeaning] = useState('');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -17,7 +16,6 @@ const AddSpelling = () => {
             alert('Error adding spelling');
         }
     };
-
     return (
         <div className="p-10 max-w-lg mx-auto">
         <h2 className="text-2xl font-bold mb-6">Add Spelling</h2>

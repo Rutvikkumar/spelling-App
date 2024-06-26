@@ -3,15 +3,6 @@ import React from "react";
 function Navbar() {
   return (
     <>
-      {/* <nav>
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/add">Add Spelling</Link></li>
-                        <li><Link to="/edit">Edit Spelling</Link></li>
-                        <li><Link to="/search">Search Spelling</Link></li>
-                    </ul>
-                </nav> */}
-
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">

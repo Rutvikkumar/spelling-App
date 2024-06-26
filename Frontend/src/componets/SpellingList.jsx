@@ -13,13 +13,8 @@ const SpellingList = () => {
     const fetchSpellings = async () => {
         try {
             const response = await axios.get('https://spelling-app.onrender.com/spellings');
-            console.log('API response:', response.data);
-
             // Ensure spellings is an array
             const spellingsData = Array.isArray(response.data) ? response.data : [];
-
-            console.log('Spellings:', spellingsData);
-
             setSpellings(spellingsData);
             setLoading(false);
         } catch (error) {
@@ -27,7 +22,6 @@ const SpellingList = () => {
             setLoading(false);
         }
     };
-
     return (
         <div className="screen flex items-center justify-center p-5">
         {loading ? (
