@@ -36,9 +36,6 @@ function Navbar() {
               <li>
                 <a href="/add">Add Spelling</a>
               </li>
-              <li>
-                <a href="/edit">Edit Spelling</a>
-              </li>
             </ul>
           </div>
         </div>
