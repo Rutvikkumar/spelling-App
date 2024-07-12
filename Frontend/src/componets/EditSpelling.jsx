@@ -1,79 +1,97 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import "tailwindcss/tailwind.css";
 
 const EditSpelling = () => {
-  const { id } = useParams();
-  const [word, setWord] = useState("");
-  const [meaning, setMeaning] = useState("");
-  const [language, setLanguage] = useState("");
+  const { word } = useParams();
+  const navigate = useNavigate();
+  const [spelling, setSpelling] = useState({ word: "", meaning: "" });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchSpelling = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/spellings/${id}`
-        );
-        setWord(response.data.word);
-        setMeaning(response.data.meaning);
-        setLanguage(response.data.language);
-      } catch (error) {
-        console.error("Error fetching spelling", error);
-      }
-    };
     fetchSpelling();
-  }, [id]);
+  }, [word]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const fetchSpelling = async () => {
     try {
-      await axios.put(`http://localhost:3000/spellings/${id}`, {
-        word,
-        meaning,
-        language,
-      });
-      alert("Spelling updated successfully");
+      const response = await axios.get(
+        "https://spelling-app.onrender.com/spellings"
+      );
+      const foundSpelling = response.data.find((spell) => spell.word === word);
+      if (foundSpelling) {
+        setSpelling(foundSpelling);
+      } else {
+        setError("Spelling not found");
+      }
+      setLoading(false);
     } catch (error) {
-      console.error("Error updating spelling", error);
-      alert("Error updating spelling");
+      setError("An error occurred while fetching the spelling");
+      setLoading(false);
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSpelling({ ...spelling, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(
+        `https://spelling-app.onrender.com/spellings/update/${word}`,
+        spelling
+      )
+      .then((response) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        setError("An error occurred while updating the spelling");
+      });
+  };
+
+  if (loading)
+    return (
+      <p className="text-lg text-center">
+        {" "}
+        <span className="loading loading-spinner text-success"></span>
+      </p>
+    );
+  if (error) return <p className="text-lg text-center text-red-500">{error}</p>;
+
   return (
-    <div>
-      <h2>Edit Spelling</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Word</label>
-          <input
-            type="text"
-            value={word}
-            onChange={(e) => setWord(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Meaning</label>
-          <input
-            type="text"
-            value={meaning}
-            onChange={(e) => setMeaning(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Language</label>
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-          >
-            <option value="Gujarati">Gujarati</option>
-            <option value="Hindi">Hindi</option>
-            <option value="English">English</option>
-          </select>
-        </div>
-        <button type="submit">Update Spelling</button>
-      </form>
+    <div className="screen flex items-center justify-center p-5">
+      <div className="card w-full max-w-2xl bg-base-100 shadow-xl p-5">
+        <h2 className="text-2xl font-bold mb-4">Edit Spelling</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-lg font-bold mb-2">Word</label>
+            <input
+              type="text"
+              name="word"
+              value={spelling.word}
+              onChange={handleChange}
+              readOnly
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-lg font-bold mb-2">Meaning</label>
+            <input
+              type="text"
+              name="meaning"
+              value={spelling.meaning}
+              onChange={handleChange}
+              className="input input-bordered w-full"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-full">
+            Update
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

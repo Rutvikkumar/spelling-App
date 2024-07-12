@@ -13,9 +13,8 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<Home/>}></Route>
                     <Route path="/add" element={<AddSpelling />} />
-                    <Route path="/edit/:id" element={<EditSpelling />} />
                     <Route path="/search" element={<SearchSpelling />} />
-                    <Route path="/add" element={<AddSpelling/>}/>
+                    <Route path="/edit/:word" element={<EditSpelling />} />
                  
                 </Routes>
             </div>

@@ -6,7 +6,8 @@ const spellingController = require('../controllers/spellingController');
 router.post('/', spellingController.createSpelling);
 router.get('/', spellingController.getAllSpellings);
 router.get('/search', spellingController.getSpelling);
-router.put('/:id', spellingController.updateSpelling);
-router.delete('/:id', spellingController.deleteSpelling);
+router.put('/update/:word', spellingController.updateSpelling);
+
+router.delete('/:word', spellingController.deleteSpelling);
 
 module.exports = router;
