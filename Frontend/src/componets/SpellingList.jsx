@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
+import toast from "react-hot-toast";
 
 const SpellingList = () => {
   const [spellings, setSpellings] = useState([]);
@@ -30,11 +31,11 @@ const SpellingList = () => {
       );
       if (response.status === 200) {
         setSpellings(spellings.filter((spelling) => spelling.word !== word));
-        alert("Spelling deleted");
+        toast.success('Spelling deleted');
       }
     } catch (error) {
       console.error("Error deleting spelling", error);
-      alert("Error deleting spelling");
+      toast.error('Error deleting spelling');
     }
   };
 

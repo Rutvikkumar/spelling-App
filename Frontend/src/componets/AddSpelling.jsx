@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 const AddSpelling = () => {
     const [word, setWord] = useState('');
@@ -10,10 +11,10 @@ const AddSpelling = () => {
             await axios.post('https://spelling-app.onrender.com/spellings', { word, meaning});
             setWord('');
             setMeaning('');
-            alert('Spelling added successfully');
+            toast.success('Spelling added successfully');
         } catch (error) {
             console.error("Error adding spelling", error);
-            alert('Error adding spelling');
+            toast.error('Error adding spelling');
         }
     };
     return (
