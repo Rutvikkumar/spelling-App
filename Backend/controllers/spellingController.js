@@ -1,10 +1,22 @@
 const Spelling = require("../models/spellingModel");
-// Create a new spelling
+
 exports.createSpelling = async (req, res) => {
   const { word, meaning } = req.body;
-  const newSpelling = new Spelling({ word, meaning });
+
+  // Trim and normalize the word
+  const normalizedWord = word.trim().toLowerCase();
+
   try {
+    // Check if the spelling already exists
+    const existingSpelling = await Spelling.findOne({ word: normalizedWord });
+    if (existingSpelling) {
+      return res.status(400).json({ message: 'Spelling already exists' });
+    }
+
+    // Create new spelling
+    const newSpelling = new Spelling({ word: normalizedWord, meaning });
     await newSpelling.save();
+    
     res.status(201).json(newSpelling);
   } catch (err) {
     res.status(400).json({ message: err.message });
