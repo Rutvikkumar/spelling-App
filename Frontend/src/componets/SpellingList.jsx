@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import toast from "react-hot-toast";
+import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const SpellingList = () => {
   const [spellings, setSpellings] = useState([]);
@@ -53,18 +55,19 @@ const SpellingList = () => {
 
                 <span className="flex justify-between">
                   {spelling.word} - {spelling.meaning}
-                  <div>
+                  <div className="flex">
                   <Link
                     to={`/edit/${spelling.word}`}
                     className="text-blue-500 mr-4"
+                    
                   >
-                    Edit
+                    <AiOutlineEdit/>
                   </Link>
                   <button
                     onClick={() => deleteSpelling(spelling.word)}
                     className="text-red-500"
                   >
-                    Delete
+                    <AiOutlineDelete />
                   </button>
                 </div>
                 </span>   
