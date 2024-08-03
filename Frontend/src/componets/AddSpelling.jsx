@@ -13,8 +13,7 @@ const AddSpelling = () => {
             setMeaning('');
             toast.success('Spelling added successfully');
         } catch (error) {
-            console.error("Error adding spelling", error);
-            toast.error('Error adding spelling');
+            toast.error('Somethin Wrong Try Again');
         }
     };
     return (
